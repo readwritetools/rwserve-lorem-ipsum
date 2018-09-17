@@ -1,0 +1,56 @@
+!blue 2.0
+
+$PLUGIN-PATH='/srv/rwserve-plugins/node_modules/rwserve-lorem-ipsum/dist/index.js'
+$PRIVATE-KEY='/etc/pki/tls/private/localhost.key'
+$CERTIFICATE='/etc/pki/tls/certs/localhost.crt'
+$DOCUMENTS-PATH='/srv/rwserve/configuration-docs'
+
+server {
+	ip-address   127.0.0.1
+	port         7443
+	cluster-size 1
+	
+	registration {
+		customer-number CN-UNREGISTERED
+		access-key      AK-UNREGISTERED
+	}
+
+	request {
+		methods GET,HEAD
+
+		accept-types {
+			mime-type '*/*'
+		}
+	}
+	
+	content-types {
+		html    text/html
+	}
+
+}
+
+host {
+	hostname       localhost
+	document-root  `$DOCUMENTS-PATH/public`
+	encoding-cache `$DOCUMENTS-PATH/encoding-cache`
+	dynamic-cache  `$DOCUMENTS-PATH/dynamic-cache`
+	landing-page   `index.blue`
+	tls {
+		private-key	`$PRIVATE-KEY`
+	    certificate	`$CERTIFICATE`
+	}
+
+	plugins {
+		rwserve-lorem-ipsum {
+			location `$PLUGIN-PATH`
+			config {
+				custom-text Bacon ipsum dolor amet tail ribeye pork loin leberkas, ham hock cupim buffalo sirloin pancetta capicola shank strip steak. Ball tip brisket t-bone beef pig, strip steak ham hock ground round rump pastrami meatball buffalo corned beef. Landjaeger beef meatball boudin prosciutto hamburger alcatra bresaola short loin turducken filet mignon tri-tip t-bone ribeye shank. Sausage kielbasa corned beef, sirloin pork ribeye beef ribs drumstick. Cow cupim buffalo tongue. Flank bresaola fatback cupim.
+				repeat      10
+				randomize   false
+			}
+		}
+		router {
+			`*`  *methods=GET,HEAD  *plugin=rwserve-lorem-ipsum
+		}	
+	}
+}

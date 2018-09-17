@@ -1,0 +1,52 @@
+!blue 2.0
+//=============================================================================
+//
+// File:         rwserve-lorem-ipsum/pro/exim
+// Language:     prorenata script
+// Copyright:    Read Write Tools © 2018
+// License:      MIT License
+// Initial date: Sep 15, 2018
+// Contents:     Convert ES6 import/export syntax to require/module syntax
+//
+//=============================================================================
+
+template {
+	eximjs 		eximjs <source> <dest>
+	ghfm		blue compile <source> <dest> --emit=ghfm
+}
+
+// ---------- rewrite export/import (src) ---------- 
+recurse {
+	source    '../src'
+	dest      '../dbg'
+	overwrite older
+	exec      eximjs
+}
+
+// ---------- look for cruft in dbg compared to original src ---------- 
+compare {
+	source    '../dbg'
+	dest      '../src'
+}
+
+// ---------- copy dbg to srv/rwserve-plugin for in-place testing ---------- 
+copy {
+	source    '../dbg'
+	dest      '/srv/rwserve-plugins/node_modules/rwserve-lorem-ipsum/dist'
+	overwrite older
+}
+
+// ---------- copy package.json to srv/rwserve-plugin for in-place testing ---------- 
+copy {
+	source    '../package.json'
+	dest      '/srv/rwserve-plugins/node_modules/rwserve-lorem-ipsum/package.json'
+	overwrite older
+}
+
+// ---------- Convert blue document into Github Flavored readme.md ---------- 
+recurse {
+	source '/palau/www/rwserve.readwritetools.com/plugins/rwserve-lorem-ipsum.blue'
+	dest   '../readme.md' 
+	overwrite older
+	exec ghfm
+}

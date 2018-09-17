@@ -1,0 +1,18 @@
+!blue 2.0
+//=============================================================================
+//
+// File:         rwserve-custom-header/pro/prepare
+// Language:     prorenata script
+// Copyright:    Read Write Tools © 2018
+// License:      MIT License
+// Initial date: Aug 10, 2018
+// Contents:     Install/refresh node dependencies 
+//
+//=============================================================================
+
+// ---------- install node module dependencies ---------- 
+run {
+	sh git pull origin master
+	sh git pull github master
+	sh npm install rwserve-plugin-sdk
+}

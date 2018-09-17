@@ -1,0 +1,17 @@
+!blue 2.0
+//=============================================================================
+//
+// File:         rwserve-lorem-ipsum/pro/test
+// Language:     prorenata script
+// Copyright:    Read Write Tools © 2018
+// License:      MIT License
+// Initial date: Sep 15, 2018
+// Contents:     Run as RWSERVE plugin
+//
+//=============================================================================
+
+//
+// ---------- Run as RWSERVE plugin  ---------- 
+run {
+	sh node --inspect=165.227.11.3:9229 ../../../app/rwserve/dbg/main.js ../etc/lorem-ipsum-config   2> /dev/null
+}

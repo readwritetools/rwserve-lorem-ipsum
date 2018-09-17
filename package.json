@@ -1,0 +1,33 @@
+{
+  "name": "rwserve-lorem-ipsum",
+  "version": "1.0.2",
+  "description": "RWSERVE plugin to generate a Lorem Ipsum payload",
+  "author": "Read Write Tools",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/readwritetools/rwserve-lorem-ipsum.git"
+  },
+  "dependencies": {
+    "rwserve-plugin-sdk": "^1.0.1"
+  },
+  "scripts": {
+    "bump-version": "npm version patch && git push && git push --tags",
+    "start": "rwserve ./etc/lorem-ipsum-config"
+  },
+  "keywords": [
+    "rwserve",
+    "http2",
+    "plugins"
+  ],
+  "bugs": {
+    "url": "https://github.com/readwritetools/rwserve-lorem-ipsum/issues"
+  },
+  "homepage": "https://rwserve.readwritetools.com/plugins/rwserve-lorem-ipsum.blue",
+  "files": [
+    "dist",
+    "etc",
+    "img"
+  ]
+}
