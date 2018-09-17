@@ -27,11 +27,11 @@
 */
 //=============================================================================
 
-import {log} 		from 'rwserve-plugin-sdk';
-import {expect} 	from 'rwserve-plugin-sdk';
-import {SC} 		from 'rwserve-plugin-sdk';
+var log = require('rwserve-plugin-sdk').log;
+var expect = require('rwserve-plugin-sdk').expect;
+var SC = require('rwserve-plugin-sdk').SC;
 
-export default class RwserveLoremIpsum {
+module.exports = class RwserveLoremIpsum {
 
 	constructor(hostConfig) {
 		this.hostname      = hostConfig.hostname;

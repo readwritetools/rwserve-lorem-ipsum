@@ -44,13 +44,13 @@ host {
 		rwserve-lorem-ipsum {
 			location `$PLUGIN-PATH`
 			config {
-				custom-text Bacon ipsum dolor amet tail ribeye pork loin leberkas, ham hock cupim buffalo sirloin pancetta capicola shank strip steak. Ball tip brisket t-bone beef pig, strip steak ham hock ground round rump pastrami meatball buffalo corned beef. Landjaeger beef meatball boudin prosciutto hamburger alcatra bresaola short loin turducken filet mignon tri-tip t-bone ribeye shank. Sausage kielbasa corned beef, sirloin pork ribeye beef ribs drumstick. Cow cupim buffalo tongue. Flank bresaola fatback cupim.
-				repeat      10
-				randomize   false
+				// custom-text   Bacon ipsum dolor amet tail ribeye pork loin leberkas, ham hock cupim buffalo sirloin pancetta capicola shank strip steak. Ball tip brisket t-bone beef pig, strip steak ham hock ground round rump pastrami meatball buffalo corned beef. Landjaeger beef meatball boudin prosciutto hamburger alcatra bresaola short loin turducken filet mignon tri-tip t-bone ribeye shank. Sausage kielbasa corned beef, sirloin pork ribeye beef ribs drumstick. Cow cupim buffalo tongue. Flank bresaola fatback cupim.
+				repeat           50
+				randomize        false
 			}
 		}
 		router {
-			`*`  *methods=GET,HEAD  *plugin=rwserve-lorem-ipsum
+			`/lorem-ipsum*`  *methods=GET,HEAD  *plugin=rwserve-lorem-ipsum
 		}	
 	}
 }
