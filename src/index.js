@@ -18,6 +18,7 @@
 				custom-text  Lorem ipsum dolor sit amet
 				repeat       10
 				randomize    false
+				content-type text/plain
 			}
 		}
 		router {
@@ -39,6 +40,7 @@ export default class RwserveLoremIpsum {
 		this.customText    = hostConfig.pluginsConfig.rwserveLoremIpsum.customText;
 		this.repeat        = (hostConfig.pluginsConfig.rwserveLoremIpsum.repeat == undefined) ? '10' : hostConfig.pluginsConfig.rwserveLoremIpsum.repeat;
 		this.randomize     = (hostConfig.pluginsConfig.rwserveLoremIpsum.randomize == undefined) ? 'false' : hostConfig.pluginsConfig.rwserveLoremIpsum.randomize;
+		this.contentType   = hostConfig.pluginsConfig.rwserveLoremIpsum.contentType;
     	Object.seal(this);
 	}
 	
@@ -68,9 +70,14 @@ export default class RwserveLoremIpsum {
 			else
 				workOrder.setOutgoingPayload(this.getClassicText(repeat, randomize));
 						
-			workOrder.addStdHeader('content-type', 'text/plain');
-			workOrder.setStatusCode(SC.OK_200);
+			// set the response 'content-type' only if specified through a query-string . . .
+			if (workOrder.hasParameter('content-type'))
+				workOrder.addStdHeader('content-type', workOrder.getParameter('content-type'));
+			// . . . or in the configuration
+			else if (this.contentType != undefined)
+				workOrder.addStdHeader('content-type', this.contentType);
 			
+			workOrder.setStatusCode(SC.OK_200);			
 		}
 		catch (err) {
 			log.error(err.message);

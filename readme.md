@@ -41,7 +41,6 @@ additional features, such as:
 
    * Obtaining custom text from data sources on the server.
    * Generating payloads in additional languages. (See ISO-639-3 for "tlh").
-   * Converting the payload to a content-type other than `text/plain`.
 
 ### Download
 
@@ -74,6 +73,7 @@ plugins {
             custom-text  Bacon ipsum dolor amet tail ribeye pork loin leberkas ham hock cupim buffalo sirloin
             repeat       10
             randomize    false
+            content-type text/plain
         }
     }
     router {
@@ -87,6 +87,7 @@ The `config` settings are straightforward:
    * `custom-text` is the Lorem Ipsum to use in the payload.
    * `repeat` is the number of times the text should be repeated.
    * `randomize` is "true" or "false".
+   * `content-type` is the MIME-type identifier to add to the response headers.
 
 When `randomize` is "false" the same payload is generated each time.
 
@@ -95,6 +96,8 @@ an arbitrary selection of classic "sentences".
 
 When `custom-text` is provided, and randomize is "true" the text is split into
 words and rearranged to provide an arbitrary selection of words.
+
+When `content-type` is omitted, no "content-type" header is added to the response.
 
 The sample `router` shown above will route any `GET` or `HEAD` request for the virtual
 resource ```/lorem-ipsum```, to the plugin.
@@ -121,7 +124,7 @@ query string variables. To do this, use the identical names as above, being sure
 to urlencode the custom text. For example:
 
 <pre>
-https://localhost:7443/lorem-ipsum?repeat=1000&randomize=true&custom-text=Bacon%20ipsum%20dolor%20amet%20tail%20ribeye%20pork%20loin%20leberkas%20ham%20hock%20cupim%20buffalo%20sirloin
+https://localhost:7443/lorem-ipsum?repeat=1000&randomize=true&content-type=text%2Fplain&custom-text=Bacon%20ipsum%20dolor%20amet%20tail%20ribeye%20pork%20loin%20leberkas%20ham%20hock%20cupim%20buffalo%20sirloin
 </pre>
 
 #### Deployment
