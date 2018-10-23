@@ -62,13 +62,13 @@ module.exports = class RwserveLoremIpsum {
 		
 		try {			
 			if (workOrder.hasParameter('custom-text')) 
-				workOrder.setOutgoingPayload(this.getCustomText(workOrder.getParameter('custom-text'), repeat, randomize));			
+				workOrder.setResponseBody(this.getCustomText(workOrder.getParameter('custom-text'), repeat, randomize));			
 
 			else if (this.customText != undefined ) 
-				workOrder.setOutgoingPayload(this.getCustomText(this.customText, repeat, randomize));
+				workOrder.setResponseBody(this.getCustomText(this.customText, repeat, randomize));
 			
 			else
-				workOrder.setOutgoingPayload(this.getClassicText(repeat, randomize));
+				workOrder.setResponseBody(this.getClassicText(repeat, randomize));
 						
 			// set the response 'content-type' only if specified through a query-string . . .
 			if (workOrder.hasParameter('content-type'))
