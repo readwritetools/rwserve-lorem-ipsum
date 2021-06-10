@@ -1,6 +1,6 @@
 {
   "name": "rwserve-lorem-ipsum",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "RWSERVE plugin to generate a Lorem Ipsum payload",
   "author": "Read Write Tools",
   "license": "MIT",
